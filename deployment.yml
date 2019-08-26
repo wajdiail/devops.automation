@@ -1,0 +1,21 @@
+---
+- hosts: ec2-instance
+  gather_facts: yes
+  become: yes
+  
+  roles:
+  # Install and configure mysql server
+   - role: install_mysql
+
+  # Setup mysql for back
+   - role: setup_backup
+
+  # Install Java
+   - role: install_java
+
+  #Install maven
+   - { role: install_maven, become: yes,  maven_major: 3, maven_version: 3.6.1, maven_home_parent_directory: /opt }
+
+
+  #Checkout git repo, update application config and start the application in daemon mode
+   - role: checkout_config_build_daemonize

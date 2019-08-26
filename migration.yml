@@ -1,0 +1,38 @@
+---
+- hosts: ec2-instance
+  become: yes
+  tasks:
+  - name: Check if MySQL is already installed.
+    stat: path=/etc/init.d/mysql
+    register: mysql_installed
+
+  - name: Take backup of the DB
+    command: /home/ubuntu/backups/backup.sh
+    when: mysql_installed.stat.exists == true
+
+  - name: checkout hive repo
+    git:
+      repo: https://github.com/smuthusa/hive
+      dest: /home/ubuntu/hive
+      update: yes
+      force: yes
+
+  - name: stop the application
+    systemd:
+      name: springbootexample
+      state: stopped
+
+#  - name: update the application configuration
+
+  - name:  Build the application
+    command: /opt/apache-maven-3.6.1/bin/mvn -f /home/ubuntu/hive/pom.xml clean install
+    register: build
+
+  - name: Start the application
+    systemd:
+     name: springbootexample
+     state: started
+
+  - name: Start Rollback
+    include: rollback.yml
+    when: build is failure

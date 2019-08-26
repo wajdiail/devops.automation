@@ -1,0 +1,21 @@
+---
+- name: revert the code
+  git:
+   repo: https://github.com/smuthusa/hive
+   dest: /home/ubuntu/hive
+   force: yes
+   version: HEAD~1
+
+- name: unzip backup
+  command: gzip /home/ubuntu/backups/databases/hotel.sql.gz
+
+- name: Restore DB
+  command: mysql -u wajid hotel < hotel.sql
+
+- name:  Build the application
+  command: /opt/apache-maven-3.6.1/bin/mvn -f /home/ubuntu/hive/pom.xml clean install
+
+- name: Start the application
+  systemd:
+    name: springbootexample
+    state: started

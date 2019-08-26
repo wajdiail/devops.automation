@@ -1,0 +1,30 @@
+---
+# tasks file for configuring
+
+- name: replacing POM.xml to fix build issues
+  copy:
+    src: "{{ role_path }}/files/pom.xml"
+    dest: /home/ubuntu/hive
+
+- name: Configure Application.yml
+  blockinfile:
+    dest: /home/ubuntu/hive/src/main/resources/application.yml
+    block: |
+       ---
+       spring:
+          profiles: mysql
+
+       datasource:
+          driverClassName: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/hotel
+          username: wajid
+          password: Welcome123
+
+       jpa:
+         hibernate:
+          dialect: org.hibernate.dialect.MySQLInnoDBDialect
+          ddl-auto: update # todo: in non-dev environments, comment this out:
+
+
+       hotel.service:
+       name: 'test profile:'

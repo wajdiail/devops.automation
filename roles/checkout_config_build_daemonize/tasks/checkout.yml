@@ -1,0 +1,16 @@
+---
+# tasks file for checkout
+- name:
+  file:
+    path: /home/ubuntu/hive
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: '1777'
+
+- name: checkout hive repo
+  git:
+    repo: https://github.com/smuthusa/hive
+    dest: /home/ubuntu/hive
+    force: yes
+    version: master

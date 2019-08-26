@@ -1,0 +1,13 @@
+---
+
+- name: Checkout code from github
+  include: checkout.yml
+
+- name: Configure credentials and repackage
+  include: configure.yml
+
+- name: Build the application
+  include: build.yml
+
+- name: Install as service/daemonize
+  include: daemonize.yml

@@ -1,0 +1,10 @@
+---
+# defaults file for daemonize
+
+springboot_application_name: springbootexample
+
+# linux user to start the service
+springboot_user: ubuntu
+
+# linux group to start the service
+springboot_group: ubuntu

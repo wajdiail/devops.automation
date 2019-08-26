@@ -1,0 +1,4 @@
+---
+# tasks file for Build
+- name:
+  command: /opt/apache-maven-3.6.1/bin/mvn -f /home/ubuntu/hive/pom.xml clean install

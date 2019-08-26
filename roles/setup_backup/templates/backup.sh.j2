@@ -1,0 +1,6 @@
+#!/bin/bash
+
+{% if backup_mysql %}
+# MySQL variables.
+mysqldump -u wajid --single-transaction --quick --lock-tables=false hotel | gzip -f -6 > /home/ubuntu/backups/databases/hotel.sql.gz
+{% endif %}
