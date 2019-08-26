@@ -4,7 +4,8 @@
 Automation tool/framework used: ANSIBLE
 
 # Setup:
-`inventory file needs to be defined with server or aws ec2 instance`
+
+inventory file needs to be defined with server or aws ec2 instance
 
 This Code has 3 segments:
 
@@ -21,4 +22,4 @@ This Code has 3 segments:
 # 3. Rollback:
 -------------------
 
-`rollback will be triggered automatically if the build fails during Migration
+rollback will be triggered automatically if the build fails during Migration
