@@ -1,2 +1,2 @@
-#Ansible Role: checkout config build and daemonize springboot app
+# Ansible Role: checkout config build and daemonize springboot app
 
